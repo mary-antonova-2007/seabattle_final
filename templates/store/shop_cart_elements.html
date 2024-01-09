@@ -1,0 +1,7 @@
+<div class="shopping-cart-icon">
+    <a href="{% url 'shop_cart' %}" class="icon">
+        <i class="fas fa-shopping-cart"></i> <!-- Используем Font Awesome для иконки корзины -->
+        <span class="badge badge-pill badge-danger">{{ total_items }}</span> <!-- Общее количество товаров -->
+    </a>
+    <span class="total-price">Общая сумма: {{ total_price }} руб.</span> <!-- Общая сумма -->
+</div>

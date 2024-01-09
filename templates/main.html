@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header-title %}
+    Викторина "Морской бой"
+{% endblock %}
+{% block navigation-buttons %}
+    main.html navigation-buttons block
+{% endblock %}
+{% block content %}
+    {% for product in products %}
+        <div class="card mb-4" style="width: 18rem;">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Цена: {{ product.price }} руб.</p>
+                <form action="{% url 'add_to_cart' product.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="quantity{{ product.id }}">Количество:</label>
+                        <input type="number" name="quantity" id="quantity{{ product.id }}" class="form-control" value="1" min="1">
+                    </div>
+                    {% if user.is_authenticated %}
+                        <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+                    {% else %}
+                        <p class="card-text"> Для покупки необходима авторизация. </p>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+{% block footer %}
+    main.html footer block
+{% endblock %}

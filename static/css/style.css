@@ -1,0 +1,27 @@
+.custom-form-group{
+    padding: 10px;
+}
+.custom-form-submit{
+    margin: 20px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-fluid {
+    flex: 1;
+}
+
+footer {
+    background-color: #007bff; /* Соответствует bg-primary в Bootstrap */
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
