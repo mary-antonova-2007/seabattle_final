@@ -27,12 +27,7 @@ class ShopCartItem(models.Model):
     product = ForeignKey(Product, on_delete=CASCADE)
     quantity = IntegerField(default=1)
     is_paid = BooleanField(default=False)
-    order = ForeignKey(Order, on_delete=CASCADE, blank=True)
+    order = ForeignKey(Order, on_delete=CASCADE, blank=True, null=True)
 
     def total_price(self):
         return self.product.price * self.quantity
-
-
-
-
-

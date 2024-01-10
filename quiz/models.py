@@ -6,7 +6,7 @@ from store.models import Product
 
 # Create your models here.
 class BattleField(models.Model):
-    user = OneToOneField(User)
+    user = OneToOneField(User, on_delete=CASCADE)
     horizontal_size = IntegerField(default=10)
     vertical_size = IntegerField(default=10)
 
