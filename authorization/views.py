@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm, CustomAuthenticationForm
+from .models import Profile
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.contrib.auth.forms import AuthenticationForm
 
 
 # Create your views here.
@@ -15,6 +15,7 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 auth_login(request, user)
+                create_profile(user)
                 return redirect('main')  # или другой URL, куда вы хотите перенаправить пользователя
             else:
                 messages.error(request, 'Неверное имя пользователя или пароль')
@@ -42,4 +43,11 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'auth/register.html', {'form': form})
+
+
+def create_profile(user):
+    profile = Profile.objects.filter(user=user)
+    if len(profile) == 0:
+        profile = Profile(user=user)
+    return profile
 
