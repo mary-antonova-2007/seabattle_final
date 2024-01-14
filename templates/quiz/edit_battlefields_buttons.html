@@ -1,0 +1,7 @@
+<div class="btn-group" role="group" aria-label="Battlefields">
+    {% for battlefield in battlefields %}
+        <a href="{% url 'edit_battlefield' battlefield.id %}" class="btn btn-secondary">
+            Редактировать {{ battlefield }}
+        </a>
+    {% endfor %}
+</div>

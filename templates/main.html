@@ -5,7 +5,9 @@
     Викторина "Морской бой"
 {% endblock %}
 {% block navigation-buttons %}
-    main.html navigation-buttons block
+    {% if user.is_superuser %}
+        {% include 'quiz/edit_battlefields_buttons.html' %}
+    {% endif %}
 {% endblock %}
 {% block content %}
     {% for product in products %}

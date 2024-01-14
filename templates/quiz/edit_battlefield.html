@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block navigation-buttons %}
+<!-- Содержимое для блока navigation-buttons -->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Левая часть: Таблица для расстановки кораблей -->
+        <div class="col-md-6">
+            <h2>Поле для расстановки кораблей</h2>
+            <table class="table table-bordered">
+                {% for i in vertical_indexes %}
+                <tr>
+                    {% for j in horizontal_indexes %}
+                    <td>
+                        <!-- Место для корабля -->
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- Правая часть: Форма для создания кораблей -->
+        <div class="col-md-6">
+            <h2>Создание корабля</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ ship_create_form.as_p }}
+                <!-- Кнопка для создания корабля -->
+                <button type="submit" name="form-type" value="ship_creation" class="btn btn-primary mt-2">Создать корабль</button>
+            </form>
+
+            <!-- Список кораблей с прикреплёнными товарами -->
+            <h3>Список кораблей</h3>
+            <ul>
+                {% for ship in ships %}
+                <li>
+                    Корабль с подарком: {{ ship.prize.name }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

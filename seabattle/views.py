@@ -1,5 +1,11 @@
 from django.shortcuts import render
 from store.models import Product, ShopCart, ShopCartItem
+from django.contrib.auth.models import User
+from quiz.models import BattleField
+
+
+def get_users_without_battlefield():
+    return User.objects.filter(battlefield=None)
 
 
 def main(request):
@@ -7,7 +13,10 @@ def main(request):
     total_items = 0
     context = dict()
     context['products'] = Product.objects.all()
+
     if request.user.is_authenticated:
+        if request.user.is_superuser:
+            context['battlefields'] = BattleField.objects.all()
         carts = ShopCart.objects.filter(user=request.user)
         if len(carts) < 1:
             cart = ShopCart(user=request.user)
